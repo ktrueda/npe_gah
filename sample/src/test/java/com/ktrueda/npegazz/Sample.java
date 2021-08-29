@@ -27,8 +27,8 @@ public class Sample {
 
     @Test
     void nullPointerDetector() {
-        FuzzyObjectGenerator generatorByJava = new FuzzyObjectGenerator();
-        for (Foo v : generatorByJava.generate(Foo.class)) {
+        FuzzyObjectGenerator generator = new FuzzyObjectGenerator();
+        for (Foo v : generator.generate(Foo.class)) {
             try {
                 targetMethod(v);
                 System.out.println(v.toString() + " OK");
