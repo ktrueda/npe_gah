@@ -1,10 +1,13 @@
-package com.ktrueda.npegazz;
+package com.ktrueda.npegazz.generator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DefaultValueSelector implements FieldValueSelector {
+/**
+ * Basic value generator
+ */
+public class BasicValueGenerator implements FieldValueGenerator {
     static class DefaultValue {
         static final Set<String> STRING = new HashSet<String>() {{
             add("string-value");
@@ -94,7 +97,7 @@ public class DefaultValueSelector implements FieldValueSelector {
         return null;
     }
 
-    static boolean classEq(Class cls1, Class cls2) {
+    private static boolean classEq(Class cls1, Class cls2) {
         return cls1.getCanonicalName().equals(cls2.getCanonicalName());
     }
 }

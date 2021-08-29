@@ -1,6 +1,8 @@
 package com.ktrueda.npegazz;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ktrueda.npegazz.fieldfilter.JsonPropertyFilter;
+import com.ktrueda.npegazz.generator.BasicValueGenerator;
 import org.junit.jupiter.api.Test;
 
 public class JsonPropertySample {
@@ -33,7 +35,7 @@ public class JsonPropertySample {
     @Test
     void nullPointerDetector() {
         FuzzyObjectGenerator generatorByJava = new FuzzyObjectGenerator(
-            new DefaultValueSelector(),
+            new BasicValueGenerator(),
             new JsonPropertyFilter()
         );
         for (Foo v : generatorByJava.generate(Foo.class)) {

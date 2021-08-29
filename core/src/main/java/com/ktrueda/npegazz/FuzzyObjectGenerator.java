@@ -1,6 +1,10 @@
 package com.ktrueda.npegazz;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.ktrueda.npegazz.fieldfilter.AllFieldFilter;
+import com.ktrueda.npegazz.fieldfilter.FieldFilter;
+import com.ktrueda.npegazz.generator.BasicValueGenerator;
+import com.ktrueda.npegazz.generator.FieldValueGenerator;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -16,17 +20,17 @@ import java.util.stream.Collectors;
  */
 public class FuzzyObjectGenerator {
 
-    final private FieldValueSelector fieldValueSelector;
+    final private FieldValueGenerator fieldValueSelector;
     final private FieldFilter fieldFilter;
 
-    public FuzzyObjectGenerator(FieldValueSelector selector, FieldFilter filter) {
+    public FuzzyObjectGenerator(FieldValueGenerator selector, FieldFilter filter) {
         this.fieldValueSelector = selector;
         this.fieldFilter = filter;
 
     }
 
     public FuzzyObjectGenerator() {
-        this.fieldValueSelector = new DefaultValueSelector();
+        this.fieldValueSelector = new BasicValueGenerator();
         this.fieldFilter = new AllFieldFilter();
     }
 
