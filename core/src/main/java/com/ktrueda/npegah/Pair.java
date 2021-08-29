@@ -1,4 +1,4 @@
-package com.ktrueda.npegazz;
+package com.ktrueda.npegah;
 import java.util.Objects;
 
 class Pair<T1, T2> {

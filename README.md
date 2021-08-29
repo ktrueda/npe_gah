@@ -1,11 +1,11 @@
-# NullPointerException Gazz
+# NullPointerException Gah
 
 All Java developers dislike NullPointerException(NPE). To avoid NPE we should use Optional type or annotations
 like `@Nullable`/`@Notnull`. But they are optional and sometimes it's wrong(null was assigned to `@Notnull` field).
 These days null-safe language like Scala/Kotlin is a good solution for this problem. However, we need to write Java for
 some reasons.
 
-NPE Gazz is a fuzz test tool to avoid NPE. You can find null-unsafe codes during unit testing.
+NPE Gah is a fuzz test tool to avoid NPE. You can find null-unsafe codes during unit testing.
 
 ```java
 public class Main {

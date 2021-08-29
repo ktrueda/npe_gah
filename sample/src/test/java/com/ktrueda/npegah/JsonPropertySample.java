@@ -1,8 +1,8 @@
-package com.ktrueda.npegazz;
+package com.ktrueda.npegah;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ktrueda.npegazz.fieldfilter.JsonPropertyFilter;
-import com.ktrueda.npegazz.generator.BasicValueGenerator;
+import com.ktrueda.npegah.fieldfilter.JsonPropertyFilter;
+import com.ktrueda.npegah.generator.BasicValueGenerator;
 import org.junit.jupiter.api.Test;
 
 public class JsonPropertySample {

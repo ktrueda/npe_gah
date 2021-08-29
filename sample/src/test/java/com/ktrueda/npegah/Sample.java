@@ -1,4 +1,4 @@
-package com.ktrueda.npegazz;
+package com.ktrueda.npegah;
 
 import org.junit.jupiter.api.Test;
 

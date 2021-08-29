@@ -1,4 +1,4 @@
-package com.ktrueda.npegazz.generator;
+package com.ktrueda.npegah.generator;
 
 import java.util.Set;
 

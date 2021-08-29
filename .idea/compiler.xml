@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
         <module name="sample" />
+        <module name="npe_gah_core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -1,12 +1,12 @@
-package com.ktrueda.npegazz;
+package com.ktrueda.npegah;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.ktrueda.npegazz.exception.GazzAssignFailedException;
-import com.ktrueda.npegazz.exception.GazzInstantiationException;
-import com.ktrueda.npegazz.fieldfilter.AllFieldFilter;
-import com.ktrueda.npegazz.fieldfilter.FieldFilter;
-import com.ktrueda.npegazz.generator.BasicValueGenerator;
-import com.ktrueda.npegazz.generator.FieldValueGenerator;
+import com.ktrueda.npegah.exception.GahAssignFailedException;
+import com.ktrueda.npegah.exception.GahInstantiationException;
+import com.ktrueda.npegah.fieldfilter.AllFieldFilter;
+import com.ktrueda.npegah.fieldfilter.FieldFilter;
+import com.ktrueda.npegah.generator.BasicValueGenerator;
+import com.ktrueda.npegah.generator.FieldValueGenerator;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -91,14 +91,14 @@ public class FuzzyObjectGenerator {
                     try {
                         p.first.set(obj, p.second);
                     } catch (IllegalAccessException e) {
-                        throw new GazzAssignFailedException();
+                        throw new GahAssignFailedException();
                     }
                 });
                 return obj;
             } catch (InstantiationException e) {
-                throw new GazzInstantiationException();
+                throw new GahInstantiationException();
             } catch (IllegalAccessException e) {
-                throw new GazzAssignFailedException();
+                throw new GahAssignFailedException();
             }
         }).collect(Collectors.toSet());
     }

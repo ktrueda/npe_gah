@@ -1,8 +1,8 @@
-package com.ktrueda.npegazz;
+package com.ktrueda.npegah;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ktrueda.npegazz.exception.GazzAssignFailedException;
-import com.ktrueda.npegazz.exception.GazzInstantiationException;
+import com.ktrueda.npegah.exception.GahAssignFailedException;
+import com.ktrueda.npegah.exception.GahInstantiationException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -190,7 +190,7 @@ class FuzzyObjectGeneratorByJavaTest {
             try {
                 sut.generate(InvalidTypeConstructor.class);
                 fail();
-            } catch (GazzInstantiationException e) {
+            } catch (GahInstantiationException e) {
             }
         }
 
@@ -199,7 +199,7 @@ class FuzzyObjectGeneratorByJavaTest {
             try {
                 sut.generate(OnlyFinalStatic.class);
                 fail();
-            } catch (GazzAssignFailedException e) {
+            } catch (GahAssignFailedException e) {
 
             }
 

@@ -1,4 +1,4 @@
-package com.ktrueda.npegazz.fieldfilter;
+package com.ktrueda.npegah.fieldfilter;
 
 import java.lang.reflect.Field;
 
