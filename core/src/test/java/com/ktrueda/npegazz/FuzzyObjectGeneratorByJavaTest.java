@@ -1,6 +1,8 @@
 package com.ktrueda.npegazz;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ktrueda.npegazz.exception.GazzAssignFailedException;
+import com.ktrueda.npegazz.exception.GazzInstantiationException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -15,6 +17,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class FuzzyObjectGeneratorByJavaTest {
 
@@ -178,6 +181,31 @@ class FuzzyObjectGeneratorByJavaTest {
         }
     }
 
+    @Nested
+    class invalidConstructor {
+        final private FuzzyObjectGenerator sut = new FuzzyObjectGenerator();
+
+        @Test
+        void instantiation() throws Exception {
+            try {
+                sut.generate(InvalidTypeConstructor.class);
+                fail();
+            } catch (GazzInstantiationException e) {
+            }
+        }
+
+        @Test
+        void assign() throws Exception {
+            try {
+                sut.generate(OnlyFinalStatic.class);
+                fail();
+            } catch (GazzAssignFailedException e) {
+
+            }
+
+        }
+    }
+
     static class Bar {
         @JsonProperty
         Float f3;
@@ -206,5 +234,16 @@ class FuzzyObjectGeneratorByJavaTest {
                 ", b=" + b +
                 '}';
         }
+    }
+
+    static class InvalidTypeConstructor {
+        InvalidTypeConstructor(int i) {
+        }
+
+        String s;
+    }
+
+    static class OnlyFinalStatic {
+        private static final String s = "";
     }
 }

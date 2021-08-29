@@ -31,8 +31,9 @@ public class Sample {
         for (Foo v : generatorByJava.generate(Foo.class)) {
             try {
                 targetMethod(v);
+                System.out.println(v.toString() + " OK");
             } catch (NullPointerException e) {
-                System.out.println(v.toString());
+                System.out.println(v.toString() + " NG");
             }
         }
     }

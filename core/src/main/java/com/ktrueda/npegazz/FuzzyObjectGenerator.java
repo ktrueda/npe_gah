@@ -1,6 +1,8 @@
 package com.ktrueda.npegazz;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.ktrueda.npegazz.exception.GazzAssignFailedException;
+import com.ktrueda.npegazz.exception.GazzInstantiationException;
 import com.ktrueda.npegazz.fieldfilter.AllFieldFilter;
 import com.ktrueda.npegazz.fieldfilter.FieldFilter;
 import com.ktrueda.npegazz.generator.BasicValueGenerator;
@@ -89,16 +91,16 @@ public class FuzzyObjectGenerator {
                     try {
                         p.first.set(obj, p.second);
                     } catch (IllegalAccessException e) {
-                        e.printStackTrace();
+                        throw new GazzAssignFailedException();
                     }
                 });
                 return obj;
             } catch (InstantiationException e) {
-                e.printStackTrace();
+                throw new GazzInstantiationException();
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                throw new GazzAssignFailedException();
             }
-            return null;
         }).collect(Collectors.toSet());
     }
+
 }
