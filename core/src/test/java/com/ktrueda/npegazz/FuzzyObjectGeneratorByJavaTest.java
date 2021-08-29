@@ -1,4 +1,4 @@
-package com.ktrueda.npegaz;
+package com.ktrueda.npegazz;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.junit.jupiter.api.Nested;

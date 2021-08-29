@@ -1,9 +1,6 @@
 package com.ktrueda.npegazz;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ktrueda.npegaz.DefaultValueSelector;
-import com.ktrueda.npegaz.FuzzyObjectGenerator;
-import com.ktrueda.npegaz.JsonPropertyFilter;
 import org.junit.jupiter.api.Test;
 
 public class JsonPropertySample {

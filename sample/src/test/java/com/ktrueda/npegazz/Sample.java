@@ -1,6 +1,5 @@
 package com.ktrueda.npegazz;
 
-import com.ktrueda.npegaz.FuzzyObjectGenerator;
 import org.junit.jupiter.api.Test;
 
 public class Sample {

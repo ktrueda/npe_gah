@@ -1,4 +1,4 @@
-package com.ktrueda.npegaz;
+package com.ktrueda.npegazz;
 
 import java.util.ArrayList;
 import java.util.HashSet;
