@@ -1,5 +1,7 @@
 package com.ktrueda.npegazz;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -7,6 +9,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Fuzzy Object Generator.
+ * <p>
+ * Generating fuzzy object to detect NullPointerException-unsafe codes.
+ */
 public class FuzzyObjectGenerator {
 
     final private FieldValueSelector fieldValueSelector;
@@ -23,6 +30,7 @@ public class FuzzyObjectGenerator {
         this.fieldFilter = new AllFieldFilter();
     }
 
+    @VisibleForTesting
     static HashSet<HashSet<Pair<Field, Object>>> cartesianProduct(Set<Pair<Field, Set<Object>>> args) {
         return args.stream().reduce(
             new HashSet<HashSet<Pair<Field, Object>>>() {{
@@ -45,6 +53,13 @@ public class FuzzyObjectGenerator {
         );
     }
 
+    /**
+     * generating method.
+     *
+     * @param clz
+     * @param <T>
+     * @return
+     */
     public <T> Set<T> generate(Class<T> clz) {
         Set<T> value = this.fieldValueSelector.value(clz);
         if (value != null) {
