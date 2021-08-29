@@ -33,12 +33,13 @@ public class Main {
 
     @Test
     void nullPointerDetector() {
-        FuzzyObjectGenerator generator = new FuzzyObjectGenerator();
-        for (Foo v : generator.generate(Foo.class)) {
+        FuzzyObjectGenerator generatorByJava = new FuzzyObjectGenerator();
+        for (Foo v : generatorByJava.generate(Foo.class)) {
             try {
                 targetMethod(v);
+                System.out.println(v.toString() + " OK");
             } catch (NullPointerException e) {
-                System.out.println(v.toString());
+                System.out.println(v.toString() + " NG L:" + e.getStackTrace()[0].getLineNumber());
             }
         }
     }
@@ -48,9 +49,10 @@ public class Main {
 Output is below. You can see some arguments which cause NPE.
 
 ```bash
-Foo{field1='null', field2='string-value'}
-Foo{field1='null', field2='null'}
-Foo{field1='string-value', field2='null'}
+Foo{field1='null', field2='null'} NG L:24
+Foo{field1='string-value', field2='string-value'} OK
+Foo{field1='null', field2='string-value'} NG L:24
+Foo{field1='string-value', field2='null'} NG L:25
 ```
 
 

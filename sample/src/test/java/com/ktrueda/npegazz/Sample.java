@@ -33,7 +33,7 @@ public class Sample {
                 targetMethod(v);
                 System.out.println(v.toString() + " OK");
             } catch (NullPointerException e) {
-                System.out.println(v.toString() + " NG");
+                System.out.println(v.toString() + " NG L:" + e.getStackTrace()[0].getLineNumber());
             }
         }
     }
