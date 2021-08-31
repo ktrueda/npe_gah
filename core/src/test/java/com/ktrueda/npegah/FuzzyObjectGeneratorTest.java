@@ -11,12 +11,14 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class FuzzyObjectGeneratorTest {
@@ -70,8 +72,8 @@ class FuzzyObjectGeneratorTest {
             @Test
             void nested() throws Exception {
                 assertEquals(
-                    // (#f1) * (#f2) * (#b)
-                    2 * 2 * 3,
+                    // (#f1) * (#f2) * (#b) * (#fss)
+                    2 * 2 * 3 * 3,
                     sut.generate(Foo.class).size()
                 );
             }
@@ -82,11 +84,21 @@ class FuzzyObjectGeneratorTest {
         class itemAndArray {
             @ParameterizedTest
             @MethodSource("eachClassMethodSource")
-            void eachClass(Class clz, Object expected) {
-                assertEquals(
-                    expected,
-                    sut.generate(clz)
-                );
+            void eachClass(Class clz, HashSet expected) {
+                if (clz.isArray()) {
+                    Set actual = sut.generate(clz);
+                    if (actual == null) {
+                        assertNull(expected);
+                    } else {
+                        assertTrue(expected.stream().allMatch(e1 -> actual.stream().anyMatch(e2 -> Arrays.equals((Object[]) e1, (Object[]) e2))));
+                        assertTrue(actual.stream().allMatch(e1 -> expected.stream().anyMatch(e2 -> Arrays.equals((Object[]) e1, (Object[]) e2))));
+                    }
+                } else {
+                    assertEquals(
+                        expected,
+                        sut.generate(clz)
+                    );
+                }
             }
 
             Stream<Arguments> eachClassMethodSource() {
@@ -100,11 +112,9 @@ class FuzzyObjectGeneratorTest {
                     ),
                     Arguments.arguments(
                         String[].class,
-                        new HashSet<ArrayList<String>>() {{
-                            add(new ArrayList<String>() {{
-                                add("string-value");
-                            }});
-                            add(new ArrayList());
+                        new HashSet<String[]>() {{
+                            add(new String[]{"string-value"});
+                            add(new String[]{});
                             add(null);
                         }}
                     ),
@@ -117,11 +127,9 @@ class FuzzyObjectGeneratorTest {
                     ),
                     Arguments.arguments(
                         Integer[].class,
-                        new HashSet<ArrayList<Integer>>() {{
-                            add(new ArrayList<Integer>() {{
-                                add(123);
-                            }});
-                            add(new ArrayList());
+                        new HashSet<Integer[]>() {{
+                            add(new Integer[]{123});
+                            add(new Integer[]{});
                             add(null);
                         }}
                     ),
@@ -134,11 +142,9 @@ class FuzzyObjectGeneratorTest {
                     ),
                     Arguments.arguments(
                         Float[].class,
-                        new HashSet<ArrayList<Float>>() {{
-                            add(new ArrayList<Float>() {{
-                                add(3.14f);
-                            }});
-                            add(new ArrayList());
+                        new HashSet<Float[]>() {{
+                            add(new Float[]{3.14f});
+                            add(new Float[]{});
                             add(null);
                         }}
                     ),
@@ -151,11 +157,9 @@ class FuzzyObjectGeneratorTest {
                     ),
                     Arguments.arguments(
                         Double[].class,
-                        new HashSet<ArrayList<Double>>() {{
-                            add(new ArrayList<Double>() {{
-                                add(2.718d);
-                            }});
-                            add(new ArrayList());
+                        new HashSet<Double[]>() {{
+                            add(new Double[]{2.718d});
+                            add(new Double[]{});
                             add(null);
                         }}
                     ),
@@ -168,11 +172,9 @@ class FuzzyObjectGeneratorTest {
                     ),
                     Arguments.arguments(
                         Boolean[].class,
-                        new HashSet<ArrayList<Boolean>>() {{
-                            add(new ArrayList<Boolean>() {{
-                                add(true);
-                            }});
-                            add(new ArrayList());
+                        new HashSet<Boolean[]>() {{
+                            add(new Boolean[]{true});
+                            add(new Boolean[]{});
                             add(null);
                         }}
                     )
@@ -225,6 +227,8 @@ class FuzzyObjectGeneratorTest {
         Integer f2;
         @JsonProperty
         Bar b;
+        @JsonProperty
+        String[] fss;
 
         @Override
         public String toString() {
@@ -232,6 +236,7 @@ class FuzzyObjectGeneratorTest {
                 "f1='" + f1 + '\'' +
                 ", f2=" + f2 +
                 ", b=" + b +
+                ", fss='" + fss + '\'' +
                 '}';
         }
     }

@@ -1,6 +1,5 @@
 package com.ktrueda.npegah.generator;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,45 +12,36 @@ public class BasicValueGenerator implements FieldValueGenerator {
             add("string-value");
             add(null);
         }};
-        static final HashSet<ArrayList<String>> STRING_ARRAY = new HashSet<ArrayList<String>>() {{
-            add(new ArrayList<String>() {{
-                add("string-value");
-            }});
-            add(new ArrayList<>());
+        static final HashSet<String[]> STRING_ARRAY = new HashSet<String[]>() {{
+            add(new String[]{"string-value"});
+            add(new String[]{});
             add(null);
         }};
         static final Set<Boolean> BOOLEAN = new HashSet<Boolean>() {{
             add(true);
             add(null);
         }};
-        static final HashSet<ArrayList<Boolean>> BOOLEAN_ARRAY = new HashSet<ArrayList<Boolean>>() {{
-            add(new ArrayList<Boolean>() {{
-                add(true);
-            }});
-            add(new ArrayList<>());
+        static final HashSet<Boolean[]> BOOLEAN_ARRAY = new HashSet<Boolean[]>() {{
+            add(new Boolean[]{true});
+            add(new Boolean[]{});
             add(null);
         }};
         static final HashSet<Integer> INTEGER = new HashSet<Integer>() {{
             add(123);
             add(null);
         }};
-        static final HashSet<ArrayList<Integer>> INTEGER_ARRAY = new HashSet<ArrayList<Integer>>() {{
-            add(new ArrayList<Integer>() {{
-                add(123);
-            }});
-            add(new ArrayList<>());
+        static final HashSet<Integer[]> INTEGER_ARRAY = new HashSet<Integer[]>() {{
+            add(new Integer[]{123});
+            add(new Integer[]{});
             add(null);
         }};
-
         static final HashSet<Float> FLOAT = new HashSet<Float>() {{
             add(3.14f);
             add(null);
         }};
-        static final HashSet<ArrayList<Float>> FLOAT_ARRAY = new HashSet<ArrayList<Float>>() {{
-            add(new ArrayList<Float>() {{
-                add(3.14f);
-            }});
-            add(new ArrayList<>());
+        static final HashSet<Float[]> FLOAT_ARRAY = new HashSet<Float[]>() {{
+            add(new Float[]{3.14f});
+            add(new Float[]{});
             add(null);
         }};
 
@@ -59,11 +49,9 @@ public class BasicValueGenerator implements FieldValueGenerator {
             add(2.718d);
             add(null);
         }};
-        static final HashSet<ArrayList<Double>> DOUBLE_ARRAY = new HashSet<ArrayList<Double>>() {{
-            add(new ArrayList<Double>() {{
-                add(2.718d);
-            }});
-            add(new ArrayList<>());
+        static final HashSet<Double[]> DOUBLE_ARRAY = new HashSet<Double[]>() {{
+            add(new Double[]{2.718d});
+            add(new Double[]{});
             add(null);
         }};
 
