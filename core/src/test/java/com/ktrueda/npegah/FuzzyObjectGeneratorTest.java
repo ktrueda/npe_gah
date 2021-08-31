@@ -19,16 +19,16 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class FuzzyObjectGeneratorByJavaTest {
+class FuzzyObjectGeneratorTest {
 
 
     @Test
-    void cartesianProduct() throws  Exception{
+    void cartesianProduct() throws Exception {
         Field f1 = Foo.class.getDeclaredField("f1");
         Field f2 = Foo.class.getDeclaredField("f2");
 
         assertEquals(
-            new HashSet<HashSet<Pair<Field, Object>>>(){{
+            new HashSet<HashSet<Pair<Field, Object>>>() {{
                 add(new HashSet<Pair<Field, Object>>() {{
                     add(new Pair<>(f1, "random-string"));
                     add(new Pair<>(f2, 123));
@@ -183,7 +183,7 @@ class FuzzyObjectGeneratorByJavaTest {
 
     @Nested
     class invalidConstructor {
-        final private FuzzyObjectGenerator sut = new FuzzyObjectGenerator();
+        private FuzzyObjectGenerator sut = new FuzzyObjectGenerator();
 
         @Test
         void instantiation() throws Exception {

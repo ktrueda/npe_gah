@@ -59,6 +59,19 @@ public class FuzzyObjectGenerator {
         );
     }
 
+    private static String makeExceptionMessage(Class clz, Set<Pair<Field, Object>> fieldValues, Exception ex) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Failed to instantiate " + clz.getCanonicalName() + "\n");
+        for (Pair<Field, Object> fieldValue : fieldValues) {
+            sb.append(fieldValue.first.getName() + " : " + fieldValue.second + "\n");
+        }
+        sb.append("check if target class has no-arg constructor.");
+        sb.append("check if target class has appropriate access modifiers.");
+
+        sb.append(ex.getMessage());
+        return sb.toString();
+    }
+
     /**
      * generating method.
      *
@@ -91,14 +104,17 @@ public class FuzzyObjectGenerator {
                     try {
                         p.first.set(obj, p.second);
                     } catch (IllegalAccessException e) {
-                        throw new GahAssignFailedException();
+//                        e.printStackTrace();
+                        throw new GahAssignFailedException(makeExceptionMessage(clz, fv, e));
                     }
                 });
                 return obj;
             } catch (InstantiationException e) {
-                throw new GahInstantiationException();
+//                e.printStackTrace();
+                throw new GahInstantiationException(makeExceptionMessage(clz, fv, e));
             } catch (IllegalAccessException e) {
-                throw new GahAssignFailedException();
+//                e.printStackTrace();
+                throw new GahAssignFailedException(makeExceptionMessage(clz, fv, e));
             }
         }).collect(Collectors.toSet());
     }
